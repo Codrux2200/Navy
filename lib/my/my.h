@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 int *compare(char **coord, int x, int y);
 char *convert(char *buff);
 char **convert_coord(char **brut_coord);
@@ -23,7 +24,7 @@ int my_putstr(char const *str);
 int my_put_nbr(int nbr);
 int my_getnbr(char *str);
 char **str_to_world_array(char *str);
-void send(pid_t pid, int to_send, int to_send2, int nbr);
+void send(pid_t pid_d, int to_send, int to_send2, int nbr);
 int coule(char **coord, int x, int y);
 char **init_map();
 int my_tablen(char **tab);
@@ -64,5 +65,5 @@ void count(navy *game, char **coord);
 int term(int sig, siginfo_t *info, void *context);
 int the_end(navy *game, navy2 *game2);
 void init(navy *game, navy2 *game2);
-pid_t pid;
+void get_pid(int sig, siginfo_t *info, void *context);
 #endif /* !MY_H_ */

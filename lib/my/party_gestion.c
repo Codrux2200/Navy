@@ -6,11 +6,12 @@
 */
 
 #include "my.h"
+pid_t pid_first;
 
 int player1(char *map, navy *game, navy2 *game2, int pass)
 {
     char *buffer = lecture(map, game);
-    
+
     game->nbr_final = 0;
     if (buffer[0] == ' ' || my_tablen(str_to_world_array(buffer)) < 12 ||
     my_tablen(str_to_world_array(buffer)) > 13)
@@ -22,37 +23,19 @@ int player1(char *map, navy *game, navy2 *game2, int pass)
     my_putstr("waiting for connection ...\n");
     recive(1, game, 1, 0);
     usleep(100);
-    send(pid, 1, 0, 1);
+    send(pid_first, 1, 0, 1);
     my_putstr("\nenemy connected");
     usleep(100);
-    send(pid, game->nbr_final, 0, 1);
+    send(pid_first, game->nbr_final, 0, 1);
     recive(1, game, 0, 0);
     game2->nbr_final2 = game->nbr_signal[0];
     my_putstr("\n");
     party(buffer, game, game2, pass);
 }
 
-int player2(char *map, pid_t pid_other, navy *game, navy2 *game2)
+void get_pid(int sig, siginfo_t *info, void *context)
 {
-    char *buffer = lecture(map, game);
-
-    game->nbr_final = 0;
-    if (buffer[0] == ' ' || my_tablen(str_to_world_array(buffer)) < 12 
-    || my_tablen(str_to_world_array(buffer)) > 13 )
-        return 84;
-    count(game, str_to_world_array(buffer));
-    my_putstr("my_pid: ");
-    my_put_nbr(getpid());
-    send(pid_other, 1, 0, 1);
-    recive(1, game, 1, 0);
-    my_putstr("\n");
-    my_putstr("successfully connected");
-    recive(1, game, 0, 0);
-    usleep(100);
-    send(pid_other, game->nbr_final, 0, 1);
-    game2->nbr_final2 = game->nbr_signal[0];
-    my_putstr("\n");
-    party2(buffer, game, pid_other, game2);
+    pid_first = (long)info->si_pid;
 }
 
 void party(char *map, navy *game, navy2 *game2, int pass)
@@ -72,7 +55,7 @@ void party(char *map, navy *game, navy2 *game2, int pass)
         for (int i = 0; i <= 1; write(1, &buff[i], 1), i++);
         usleep(300);
         my_putstr(": ");
-        send(pid, (buff[0] - 'A'), (buff[1] - '0'), 2);
+        send(pid_first, (buff[0] - 'A'), (buff[1] - '0'), 2);
         recive(1, game, 0, 0);
         reciv_signal(game, game2, buff);
         party_suite(map, game, game2, buff);
@@ -94,7 +77,7 @@ void party_suite(char *map, navy *game, navy2 *game2, char *buff)
     my_putstr(": ");
     nbr = verif((game->nbr_signal[0] - 1),
     (game->nbr_signal[1]), game, str_to_world_array(map));
-    send(pid, nbr, 0, 1);
+    send(pid_first, nbr, 0, 1);
     my_putstr("\nmy positions:\n");
     print_map(str_to_world_array(map), game);
     my_putstr("\n");

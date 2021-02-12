@@ -7,7 +7,7 @@
 
 #include "my.h"
 
-void send(pid_t pid, int to_send, int to_send2, int nbr)
+void send(pid_t pid_d, int to_send, int to_send2, int nbr)
 {
     usleep(100);
     int *sendo = malloc(2 * sizeof(int *));
@@ -15,17 +15,12 @@ void send(pid_t pid, int to_send, int to_send2, int nbr)
     sendo[1] = to_send2;
     for (int r = 0; r < nbr; r++){
         for (int i = 0; i != sendo[r]; i++){
-            kill(pid, SIGUSR1);
+            kill(pid_d, SIGUSR1);
             usleep(30);
         }
         sleep(1);
-        kill(pid, SIGUSR2);
+        kill(pid_d, SIGUSR2);
     }
-}
-
-void get_pid(int sig, siginfo_t *info, void *context)
-{
-    pid = (long)info->si_pid;
 }
 
 void recive(int nbrseg2, navy *game, int first, int sig)
@@ -85,3 +80,25 @@ void reciv_signal(navy *game, navy2 *game2, char *buff)
     }
 }
 
+int player2(char *map, pid_t pid_other, navy *game, navy2 *game2)
+{
+    char *buffer = lecture(map, game);
+
+    game->nbr_final = 0;
+    if (buffer[0] == ' ' || my_tablen(str_to_world_array(buffer)) < 12 
+    || my_tablen(str_to_world_array(buffer)) > 13 )
+        return 84;
+    count(game, str_to_world_array(buffer));
+    my_putstr("my_pid: ");
+    my_put_nbr(getpid());
+    send(pid_other, 1, 0, 1);
+    recive(1, game, 1, 0);
+    my_putstr("\n");
+    my_putstr("successfully connected");
+    recive(1, game, 0, 0);
+    usleep(100);
+    send(pid_other, game->nbr_final, 0, 1);
+    game2->nbr_final2 = game->nbr_signal[0];
+    my_putstr("\n");
+    party2(buffer, game, pid_other, game2);
+}
