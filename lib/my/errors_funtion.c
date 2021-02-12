@@ -35,7 +35,7 @@ void party2(char *map, navy *game, pid_t other_pid, navy2 *game2)
         if (the_end(game, game2) == 1) break;
         usleep(300);
         my_putstr("waiting for enemy's attack...\n");
-        recive(2, game, 0);
+        recive(2, game, 0, 0);
         x = (game->nbr_signal[0] + 'A') - 1;
         y = (game->nbr_signal[1] + 1) + '0';
         write(1, &x, 1);
@@ -60,7 +60,7 @@ int party2_suite(char *map, navy *game, pid_t other_pid, navy2 *game2)
     for (int i = 0; i <= 1; write(1, &buff[i], 1), i++);
     my_putstr(": ");
     send(other_pid, (buff[0] - 'A'), (buff[1] - '0'), 2);
-    recive(1, game, 0);
+    recive(1, game, 0, 0);
     reciv_signal(game, game2, buff);
     my_putstr("\nmy positions:\n");
     print_map(str_to_world_array(map), game);
