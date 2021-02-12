@@ -1,0 +1,7 @@
+map
+map2
+navy
+lib/my/*.o
+libmy.a
+include/my.h
+NormEZ.rb
