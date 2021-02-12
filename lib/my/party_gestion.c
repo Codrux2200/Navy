@@ -10,7 +10,8 @@
 int player1(char *map, navy *game, navy2 *game2, int pass)
 {
     char *buffer = lecture(map, game);
-
+    
+    game->nbr_final = 0;
     if (buffer[0] == ' ' || my_tablen(str_to_world_array(buffer)) < 12 ||
     my_tablen(str_to_world_array(buffer)) > 13)
         return 84;

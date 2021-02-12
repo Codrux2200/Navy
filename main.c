@@ -12,7 +12,6 @@ int main(int ac, char **av)
     navy2 *game2 = malloc(sizeof(game2));
 
     game->end = 0;
-    game->nbr_final = 0;
     init(game, game2);
     if (ac == 2){
         if (player1(av[1], game, game2, 0) == 84){
