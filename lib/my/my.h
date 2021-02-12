@@ -49,7 +49,7 @@ int no_coule(char **coord, int x, int y);
 void add_str(navy *game, int x, int y);
 int verif(int x, int y, navy *game, char **coord);
 void party2(char *map, navy *game, pid_t pid_other, navy2 *game2);
-void recive(int nbrseg2, navy *game, int first);
+void recive(int nbrseg2, navy *game, int first, int sig);
 void party(char *map, navy *game, navy2 *game2, int pass);
 void print_map(char **coord, navy *game);
 void print_map2(char **coord, navy2 *game);

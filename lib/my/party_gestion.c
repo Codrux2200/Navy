@@ -19,13 +19,13 @@ int player1(char *map, navy *game, navy2 *game2, int pass)
     my_put_nbr(getpid());
     my_putstr("\n");
     my_putstr("waiting for connection ...\n");
-    recive(1, game, 1);
+    recive(1, game, 1, 0);
     usleep(100);
     send(pid, 1, 0, 1);
     my_putstr("\nenemy connected");
     usleep(100);
     send(pid, game->nbr_final, 0, 1);
-    recive(1, game, 0);
+    recive(1, game, 0, 0);
     game2->nbr_final2 = game->nbr_signal[0];
     my_putstr("\n");
     party(buffer, game, game2, pass);
@@ -42,10 +42,10 @@ int player2(char *map, pid_t pid_other, navy *game, navy2 *game2)
     my_putstr("my_pid: ");
     my_put_nbr(getpid());
     send(pid_other, 1, 0, 1);
-    recive(1, game, 1);
+    recive(1, game, 1, 0);
     my_putstr("\n");
     my_putstr("successfully connected");
-    recive(1, game, 0);
+    recive(1, game, 0, 0);
     usleep(100);
     send(pid_other, game->nbr_final, 0, 1);
     game2->nbr_final2 = game->nbr_signal[0];
@@ -71,7 +71,7 @@ void party(char *map, navy *game, navy2 *game2, int pass)
         usleep(300);
         my_putstr(": ");
         send(pid, (buff[0] - 'A'), (buff[1] - '0'), 2);
-        recive(1, game, 0);
+        recive(1, game, 0, 0);
         reciv_signal(game, game2, buff);
         party_suite(map, game, game2, buff);
     }
@@ -84,7 +84,7 @@ void party_suite(char *map, navy *game, navy2 *game2, char *buff)
     int nbr = 0;
 
     my_putstr("\nwaiting for enemy's attack...\n");
-    recive(2, game, 0);
+    recive(2, game, 0, 0);
     x = (game->nbr_signal[0] + 'A') - 1;
     y = (game->nbr_signal[1] + 1) + '0';
     write(1, &x, 1);

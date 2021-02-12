@@ -28,11 +28,11 @@ void get_pid(int sig, siginfo_t *info, void *context)
     pid = (long)info->si_pid;
 }
 
-void recive(int nbrseg2, navy *game, int first)
+void recive(int nbrseg2, navy *game, int first, int sig)
 {
     game->nbr_signal = malloc(2 * sizeof(int *));
     struct sigaction s, sa;
-    int sig2, sig = 0;
+    int sig2 = 0;
 
     sigemptyset(&s.sa_mask);
     s.sa_flags = SA_SIGINFO;
