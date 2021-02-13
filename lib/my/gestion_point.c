@@ -30,6 +30,7 @@ void second_add_str(navy2 *game, int x, int y)
 {
     int i;
     char *test = malloc(2 * sizeof(char *));
+
     for (i = 0; game->dead_boat2[i] != NULL; i++);
     test[0] = x + '0';
     test[1] = y + '0';
@@ -41,6 +42,7 @@ void second_no_str(navy2 *game, int x, int y)
 {
     int i;
     char *test = malloc(2 * sizeof(char *));
+
     for (i = 0; game->nop2[i] != NULL; i++);
     test[0] = x + '0';
     test[1] = y + '0';
@@ -52,6 +54,7 @@ void add_str(navy *game, int x, int y)
 {
     int i;
     char *test = malloc(2 * sizeof(char *));
+    
     for (i = 0; game->dead_boat[i] != NULL; i++);
     test[0] = x + '0';
     test[1] = y + '0';
