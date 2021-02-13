@@ -13,7 +13,7 @@ int my_putstr(char const *str);
 int part(int nbr)
 {
     if (nbr > 2147483548 || nbr < -2147483548){
-        write (2, "int_max !!", 12);
+        write (2, "int_max !!\n", 13);
         return 84;
     }
     if (nbr < 0){
