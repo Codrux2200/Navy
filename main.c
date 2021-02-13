@@ -75,7 +75,7 @@ int *compare(char **coord, int x, int y)
             }
     }
     ret[0] = 0;
-    ret[1] = NULL;
+    ret[1] = 0;
     return ret;
 }
 

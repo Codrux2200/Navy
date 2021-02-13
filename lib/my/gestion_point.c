@@ -24,11 +24,12 @@ char *convert(char *buff)
         buff[0] = buff[0];
         buff[1] = buff[1] - 1;
     }
+    return buff;
 }
 
 void second_add_str(navy2 *game, int x, int y)
 {
-    int i;
+    int i = 0;
     char *test = malloc(2 * sizeof(char *));
 
     for (i = 0; game->dead_boat2[i] != NULL; i++);
@@ -40,7 +41,7 @@ void second_add_str(navy2 *game, int x, int y)
 
 void second_no_str(navy2 *game, int x, int y)
 {
-    int i;
+    int i = 0;
     char *test = malloc(2 * sizeof(char *));
 
     for (i = 0; game->nop2[i] != NULL; i++);
@@ -52,7 +53,7 @@ void second_no_str(navy2 *game, int x, int y)
 
 void add_str(navy *game, int x, int y)
 {
-    int i;
+    int i = 0;
     char *test = malloc(2 * sizeof(char *));
     
     for (i = 0; game->dead_boat[i] != NULL; i++);

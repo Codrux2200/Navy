@@ -21,6 +21,7 @@ void send(pid_t pid_d, int to_send, int to_send2, int nbr)
         sleep(1);
         kill(pid_d, SIGUSR2);
     }
+    free(sendo);
 }
 
 void recive(int nbrseg2, navy *game, int first, int sig)
@@ -49,8 +50,8 @@ void recive(int nbrseg2, navy *game, int first, int sig)
 
 int term(int sig, siginfo_t *info,  void *context)
 {
-    static number = 0;
-    static sig_old = 0;
+    static int number = 0;
+    static int sig_old = 0;
     
     if (sig == SIGUSR1)
         number++;
