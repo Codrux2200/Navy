@@ -11,6 +11,7 @@ char **init_map()
 {
     char *line = "........";
     char **map = malloc(8 * sizeof(char **));
+    
     for (int i = 0; i != 8; i++)
         map[i] = line;
     free(line);
@@ -67,6 +68,7 @@ char *lecture(char *file, navy *game)
     int fd = open(file, O_RDONLY);
     char *buffer;
     struct stat sb;
+
     if (fd == -1){
         my_putstr_err("ERROR READ MAP\n");
         buffer = " ";
@@ -82,6 +84,7 @@ void add_no(navy *game, int x, int y)
 {
     int i;
     char *test = malloc(2 * sizeof(char *));
+
     for (i = 0; game->nop[i] != NULL; i++);
     test[0] = x + '0';
     test[1] = y + '0';
