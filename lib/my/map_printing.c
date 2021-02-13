@@ -42,7 +42,6 @@ void print_map(char **coord, navy *game)
     }
 }
 
-
 void print_map2(char **coord, navy2 *game)
 {
     coord = convert_coord(coord);

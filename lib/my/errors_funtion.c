@@ -25,6 +25,7 @@ void party2(char *map, navy *game, pid_t other_pid, navy2 *game2)
     char x;
     char y;
     char *buff = malloc(2 * sizeof(char *));
+    
     game->end = 0;
     my_putstr("\nmy positions:\n");
     print_map(str_to_world_array(map), game);
