@@ -51,6 +51,7 @@ int term(int sig, siginfo_t *info,  void *context)
 {
     static number = 0;
     static sig_old = 0;
+    
     if (sig == SIGUSR1)
         number++;
     if (sig == SIGUSR2){
