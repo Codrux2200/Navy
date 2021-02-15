@@ -20,7 +20,7 @@ int player1(char *map, navy *game, navy2 *game2, int pass)
     my_putstr("my_pid: ");
     my_put_nbr(getpid());
     my_putstr("\n");
-    my_putstr("waiting for connection ...\n");
+    my_putstr("waiting for enemy connection...\n");
     recive(1, game, 1, 0);
     usleep(100);
     send(pid_first, 1, 0, 1);
